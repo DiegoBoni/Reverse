@@ -54,5 +54,6 @@
         "Temp/":true
     },
     "CodeGPT.apiKey": "OpenAI",
-    "dotnet.preferCSharpExtension": true
+    "dotnet.preferCSharpExtension": true,
+    "dotnet.defaultSolution": "disable"
 }
