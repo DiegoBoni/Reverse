@@ -79,7 +79,7 @@ public class CameraManager : MonoBehaviour
 		}
 		else
 		{
-			h = Input.GetAxis("Mouse X");
+			h = 0; //Input.GetAxis("Mouse X");
 			v = Input.GetAxis("Mouse Y");
 		}
 		
