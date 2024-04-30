@@ -5,13 +5,15 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action OnGameStart;
-    public static Action OnGameEnd;
-
+    [Header("Game Setting")]
+    [SerializeField] private GameObject _player;
+    public float PlayerSpeed;
+    public float EnemySpeed;
     public static GameManager Instance;
 
-    [SerializeField] private GameObject _player;
-
+    public static Action OnGameStart;
+    public static Action OnGameEnd;
+    
     private Vector3[] _playerInitialPositions;
 
     private void Awake()

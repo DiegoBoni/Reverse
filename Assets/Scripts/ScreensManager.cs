@@ -11,6 +11,7 @@ public class ScreensManager : MonoBehaviour
 
     [Header("Screens")]
     [SerializeField] private GameObject _mainMenu = null;
+    [SerializeField] private GameObject _countdown = null;
     [SerializeField] private GameObject _gameplay = null;
     [SerializeField] private GameObject _gameOver = null;
     [SerializeField] private GameObject _pause = null;
@@ -90,12 +91,18 @@ public class ScreensManager : MonoBehaviour
     private void OnStartGameHandler()
     {
         _mainMenu.SetActive(false);
-        _gameplay.SetActive(true);
+        _countdown.SetActive(true);
         _gameOver.SetActive(false);
         _pause.SetActive(false);
 
         GameManager.Instance.StartGame();
         UpdateMusic(_musicGamePlay);
+    }
+
+    public void OnStartRunning()
+    {
+        _gameplay.SetActive(true);
+        _countdown.SetActive(false);
     }
 
     private void OnPauseHandler()
@@ -106,6 +113,7 @@ public class ScreensManager : MonoBehaviour
             Time.timeScale = _isPause ? 1 : 0;
 
             _mainMenu.SetActive(false);
+            _countdown.SetActive(false);
             _gameplay.SetActive(_isPause);
             _gameOver.SetActive(false);
             _pause.SetActive(!_isPause);
@@ -118,6 +126,7 @@ public class ScreensManager : MonoBehaviour
         Time.timeScale = 1;
 
         _mainMenu.SetActive(true);
+        _countdown.SetActive(false);
         _gameplay.SetActive(false);
         _gameOver.SetActive(false);
         _pause.SetActive(false);
