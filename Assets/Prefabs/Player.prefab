@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086647881361348134}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1982684353979357282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,11 +59,10 @@ MonoBehaviour:
   _character: {fileID: 3175215430612314264}
   _idleAnimation: Idle
   _runAnimation: Run
-  _jumpAnimation: Jump
+  _jumpAnimation: Slide
   _eachMove: 3
   _jumpForce: 5
-  _gravity: 0
-  Speed: 1
+  Speed: 0
 --- !u!54 &4001554543510752320
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72,7 +71,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086647881361348134}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -98,7 +97,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086647881361348134}
-  m_Material: {fileID: 13400000, guid: 42f5937c5cd107c44bcdb155f14c54c0, type: 2}
+  m_Material: {fileID: 13400000, guid: c5881576458665e4eb49f9bcbb8f6066, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

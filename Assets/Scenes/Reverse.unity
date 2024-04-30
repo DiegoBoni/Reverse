@@ -3720,22 +3720,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1697958146}
     m_Modifications:
-    - target: {fileID: 1786989001924672101, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: c5881576458665e4eb49f9bcbb8f6066, type: 2}
-    - target: {fileID: 1982684353979357282, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
-      propertyPath: Speed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1982684353979357282, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
-      propertyPath: _jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1982684353979357282, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
-      propertyPath: _jumpAnimation
-      value: Slide
-      objectReference: {fileID: 0}
     - target: {fileID: 2086647881361348130, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3780,17 +3764,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2086647881361348133, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 2086647881361348134, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4001554543510752320, guid: 943c29498ab959842b6d7bee1f42370e, type: 3}
-      propertyPath: m_Mass
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
