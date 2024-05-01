@@ -8,11 +8,13 @@ public class CountdownScreen : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _countdownText;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private EnemyController _enemyController;
 
     private void OnEnable()
     {
         StartCoroutine(StartCountdown());
         _playerController.Speed = 0;
+        _enemyController.Speed = 0;
     }
 
     private IEnumerator StartCountdown()
@@ -35,6 +37,7 @@ public class CountdownScreen : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         _playerController.Speed = GameManager.Instance.PlayerSpeed;
+        _enemyController.Speed = GameManager.Instance.EnemySpeed;
 
         ScreensManager.Instance.OnStartRunning();
     }

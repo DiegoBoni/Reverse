@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start() 
     {
+        Init();
+    }
+
+    private void Init()
+    {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true;
 
@@ -48,13 +53,16 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+    }
 
+    private void FixedUpdate()
+    {
         Run(Speed);
     }
 
     private void Run(float speed)
     {
-        Vector3 movement = new Vector3(0.0f, 0.0f, speed);
+        Vector3 movement = transform.forward * speed;
         _rb.MovePosition(transform.position + movement * Time.deltaTime);
 
         _character.SetTrigger(speed > 0 ? _runAnimation : _idleAnimation);
@@ -99,6 +107,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             _isGrounded = true;
+        }
+
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            ScreensManager.Instance.OnShowDebriefHandler(true);
+            GameManager.Instance.OnEndGameHandler();
         }
     }
 

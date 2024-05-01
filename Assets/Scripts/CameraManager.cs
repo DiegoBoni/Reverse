@@ -8,7 +8,6 @@ public class CameraManager : MonoBehaviour
 	[SerializeField] private Transform target; 
 	[SerializeField] private float followSpeed = 3; 
 	[SerializeField] private float mouseSpeed = 2; 
-	//[SerializeField] private float controllerSpeed = 5; 
 	[SerializeField] private float cameraDist = 3; 
 	[SerializeField] private float lookAngle;
 	[SerializeField] private float tiltAngle; 

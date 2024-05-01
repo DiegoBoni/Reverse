@@ -6,7 +6,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     [Header("Game Setting")]
-    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _players;
     public float PlayerSpeed;
     public float EnemySpeed;
     public static GameManager Instance;
@@ -38,34 +38,49 @@ public class GameManager : MonoBehaviour
 
     private void Init()
     {
-        _player.SetActive(false);
+        _players.SetActive(false);
     }
 
     public void StartGame()
     {
         OnGameStart?.Invoke();
 
-        _player.SetActive(true);
+        _players.SetActive(true);
+        SetChildrenActive(_players, true);
+
         ResetPlayerPositions();
 
         UserStats.CurrentScore = 0;
         ScreensManager.Instance.UpdateScore(UserStats.CurrentScore);
     }
 
+    private void SetChildrenActive(GameObject parent, bool active)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.SetActive(active);
+        }
+    }
+
+    public void OnEndGameHandler()
+    {
+        _players.GetComponentInChildren<EnemyController>().Speed = 0;
+    }
+
     public void ResetPlayerPositions()
     {
-        for (int i = 0; i < _player.transform.childCount; i++)
+        for (int i = 0; i < _players.transform.childCount; i++)
         {
-            _player.transform.GetChild(i).position = _playerInitialPositions[i];
+            _players.transform.GetChild(i).position = _playerInitialPositions[i];
         }
     }
 
     private void SaveInitialPositions()
     {
-        _playerInitialPositions = new Vector3[_player.transform.childCount];
-        for (int i = 0; i < _player.transform.childCount; i++)
+        _playerInitialPositions = new Vector3[_players.transform.childCount];
+        for (int i = 0; i < _players.transform.childCount; i++)
         {
-            _playerInitialPositions[i] = _player.transform.GetChild(i).position;
+            _playerInitialPositions[i] = _players.transform.GetChild(i).position;
         }
     }
 }

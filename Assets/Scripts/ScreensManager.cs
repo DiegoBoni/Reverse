@@ -13,7 +13,7 @@ public class ScreensManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenu = null;
     [SerializeField] private GameObject _countdown = null;
     [SerializeField] private GameObject _gameplay = null;
-    [SerializeField] private GameObject _gameOver = null;
+    [SerializeField] private GameObject _debrief = null;
     [SerializeField] private GameObject _pause = null;
     [Space]
 
@@ -30,7 +30,7 @@ public class ScreensManager : MonoBehaviour
     [Header("Musics")]
     [SerializeField] private AudioClip _musicMainMenu;
     [SerializeField] private AudioClip _musicGamePlay;
-    // [SerializeField] private AudioClip _musicGameOver;
+    // [SerializeField] private AudioClip _musicDebrief;
     [Space]
 
     [SerializeField] private AudioSource _musicSource;
@@ -92,7 +92,7 @@ public class ScreensManager : MonoBehaviour
     {
         _mainMenu.SetActive(false);
         _countdown.SetActive(true);
-        _gameOver.SetActive(false);
+        _debrief.SetActive(false);
         _pause.SetActive(false);
 
         GameManager.Instance.StartGame();
@@ -115,12 +115,12 @@ public class ScreensManager : MonoBehaviour
             _mainMenu.SetActive(false);
             _countdown.SetActive(false);
             _gameplay.SetActive(_isPause);
-            _gameOver.SetActive(false);
+            _debrief.SetActive(false);
             _pause.SetActive(!_isPause);
         }
     }
 
-    private void OnMainMenuHandler()
+    public void OnMainMenuHandler()
     {
         UpdateMusic(_musicMainMenu);
         Time.timeScale = 1;
@@ -128,8 +128,21 @@ public class ScreensManager : MonoBehaviour
         _mainMenu.SetActive(true);
         _countdown.SetActive(false);
         _gameplay.SetActive(false);
-        _gameOver.SetActive(false);
+        _debrief.SetActive(false);
         _pause.SetActive(false);
+    }
+
+    public void OnShowDebriefHandler(bool isWon)
+    {
+        // UpdateMusic(_musicDebrief);
+
+        _mainMenu.SetActive(false);
+        _countdown.SetActive(false);
+        _gameplay.SetActive(false);
+        _debrief.SetActive(true);
+        _pause.SetActive(false);
+
+        _debrief.GetComponent<DebriefManager>().SetDebrief(isWon);
     }
 
      public void UpdateScore(int currentScore)
