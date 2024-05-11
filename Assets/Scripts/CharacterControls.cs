@@ -24,6 +24,11 @@ public class CharacterControls : MonoBehaviour
 	[SerializeField] private float _jumpHeight; 
 	[SerializeField] private float _maxFallSpeed; 
 	[SerializeField] private float _rotateSpeed; 
+	[Space]
+
+	[Header("Automatic Run")]
+	[SerializeField] private bool _isRuningAutomatic;
+	[SerializeField] private bool _isRunnnigRiel;
 
 	private Rigidbody _rb;
 	private Vector3 _pushDir;
@@ -52,11 +57,16 @@ public class CharacterControls : MonoBehaviour
 
 	private void Update()
 	{
+		if (Input.GetKeyUp(KeyCode.F))
+		{
+			_isRuningAutomatic = !_isRuningAutomatic;
+		}
+
 		float h;
 		float v;
 
 		h = Input.GetAxis("Horizontal");
-		v = Input.GetAxis("Vertical");
+		v = _isRuningAutomatic ? 1f : Input.GetAxis("Vertical");
 
 		Vector3 v2 = v * _cam.transform.forward; 
 		Vector3 h2 = h * _cam.transform.right; 
@@ -82,6 +92,7 @@ public class CharacterControls : MonoBehaviour
 				targetDir.y = 0;
 				if (targetDir == Vector3.zero)
 					targetDir = transform.forward;
+
 				Quaternion tr = Quaternion.LookRotation(targetDir); 
 				Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, Time.deltaTime * _rotateSpeed); 
 				transform.rotation = targetRotation;
