@@ -6,12 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     public Transform _player;
     public float Speed;
+    public bool chase = true;
 
     private void FixedUpdate()
     {
-        if (_player != null)
+        if (_player != null && chase)
         {
-            Vector3 direction = (_player.position - transform.position).normalized;
+            Vector3 playerPos = new Vector3(_player.position.x, transform.position.y, _player.position.z);
+            Vector3 direction = (playerPos - transform.position).normalized;
             transform.position += direction * Speed * Time.deltaTime;
         }
     }
@@ -23,5 +25,14 @@ public class EnemyController : MonoBehaviour
             other.gameObject.SetActive(false);
             ScreensManager.Instance.OnShowDebriefHandler(false);
         }
+        if (other.CompareTag("Door"))
+            StartCoroutine(StopChase());
+    }
+
+    IEnumerator StopChase() 
+    {
+        chase = false;
+        yield return new WaitForSeconds(1);
+        chase = true;
     }
 }
