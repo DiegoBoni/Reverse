@@ -14,13 +14,35 @@ public class DoorController : MonoBehaviour
     [SerializeField] private float ExplotionForce = 1;
     [SerializeField] private float ExplotionRadius = 1;
     [SerializeField] private Transform ExplotionPivot;
+    [SerializeField] private Transform DoorsPivot;
+    [SerializeField] private GameObject DoorLeftPrefab;
+    [SerializeField] private GameObject DoorRightPrefab;
     [SerializeField] private GameObject DoorLeftBroken;
     [SerializeField] private GameObject DoorRightBroken;
+    [SerializeField] private bool DoorsBrokens = true;
 
     private void Start()
+    {      
+        GameManager.OnGameStart += SetDoorSettings;
+    }
+
+    public void SetDoorSettings() 
     {
-        DoorLeft.localPosition = new Vector3 (InitialPosX, 0, 0);
+        DoorLeft.gameObject.SetActive(true);
+        DoorRight.gameObject.SetActive(true);
+        DoorLeft.localPosition = new Vector3(InitialPosX, 0, 0);
         DoorRight.localPosition = new Vector3(-InitialPosX, 0, 0);
+
+        if (DoorsBrokens) 
+        {
+            Destroy(DoorRightBroken);
+            Destroy(DoorLeftBroken);
+            DoorLeftBroken = Instantiate(DoorLeftPrefab, DoorsPivot);
+            DoorRightBroken = Instantiate(DoorRightPrefab, DoorsPivot);
+        }      
+
+        GetComponent<Collider>().enabled = true;
+        DoorsBrokens = false;
     }
 
     private void OnTriggerEnter(Collider coll)
@@ -46,6 +68,7 @@ public class DoorController : MonoBehaviour
                 rb.AddExplosionForce(ExplotionForce, ExplotionPivot.position, ExplotionRadius, 3.0F);
 
             GetComponent<Collider>().enabled = false;
+            DoorsBrokens = true;
         }
     }
 }
