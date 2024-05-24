@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform _player;
+    [SerializeField] private Transform _player;
     public float Speed;
-    public bool chase = true;
+    [SerializeField] private bool chase = true;
 
     private void FixedUpdate()
     {
@@ -26,10 +26,10 @@ public class EnemyController : MonoBehaviour
             ScreensManager.Instance.OnShowDebriefHandler(false);
         }
         if (other.CompareTag("Door"))
-            StartCoroutine(StopChase());
+        StartCoroutine(StopChase());
     }
 
-    IEnumerator StopChase() 
+    private IEnumerator StopChase() 
     {
         chase = false;
         yield return new WaitForSeconds(1);

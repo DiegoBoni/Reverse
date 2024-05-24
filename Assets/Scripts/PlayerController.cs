@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _eachMove;
     [SerializeField] private float _jumpForce;
     public float Speed;
+    public float RotationSpeed;
 
     private float _left;
     private float _middle;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private int _currentPosition = 1;
     private Rigidbody _rb; 
     private bool _isGrounded = false;
+    private float _currentRotation = 0f;
+    
 
     private void Start() 
     {
@@ -39,20 +42,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {   
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Move(+1);
-        }
+        // if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        // {
+            // Move(+1);
+        // }
 
-        if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Move(-1);
-        }
+        // if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        // {
+            // Move(-1);
+        // }
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
+
+        RotatePlayer(RotationSpeed * Input.GetAxis("Horizontal"));
     }
 
     private void FixedUpdate()
@@ -65,7 +70,17 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = transform.forward * speed;
         _rb.MovePosition(transform.position + movement * Time.deltaTime);
 
-        _character.SetTrigger(speed > 0 ? _runAnimation : _idleAnimation);
+        if(_isGrounded)
+        {
+            _character.SetTrigger(speed > 0 ? _runAnimation : _idleAnimation);
+        }
+    }
+
+    private void RotatePlayer(float angle)
+    {
+        _currentRotation += angle;
+        _currentRotation = Mathf.Clamp(_currentRotation, -90f, 90f);
+        transform.rotation = Quaternion.Euler(0f, _currentRotation, 0f);
     }
 
     private void SetPositions()
